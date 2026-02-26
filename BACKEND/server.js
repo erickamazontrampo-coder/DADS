@@ -1,18 +1,26 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path'); // <-- ADICIONE ESTA LINHA NO TOPO
+const path = require('path'); // Corretamente adicionado no topo
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// --- ADICIONE ESTAS LINHAS AQUI (FUNDAMENTAL PARA O SITE ABRIR) ---
+// Como o server.js está na pasta BACKEND, usamos '..' para subir um nível e achar o index.html
+app.use(express.static(path.join(__dirname, '..')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
+// -----------------------------------------------------------------
+
 const API_KEY = "sk_live_ku1o8KMI-zvrp_OjUEyCOOYp4ChA9VKoBxvzZR2hM3c";
 
 app.post("/create-pix", async (req, res) => {
   const { value, cpf } = req.body;
 
-  // DEBUG (IMPORTANTE)
   console.log("BODY RECEBIDO:", req.body);
 
   if (!value || !cpf) {
@@ -33,12 +41,9 @@ app.post("/create-pix", async (req, res) => {
     res.status(500).json({ error: true });
   }
 });
-// O Render vai usar o process.env.PORT. Se estiver no seu PC, ele usa a 3000.
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`✅ Backend PIX rodando na porta ${PORT}`);
 });
-
-
-
