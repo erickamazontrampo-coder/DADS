@@ -1,6 +1,6 @@
-const express = require("express");
-const fetch = require("node-fetch"); // <-- AGORA FUNCIONA
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
+const path = require('path'); // <-- ADICIONE ESTA LINHA NO TOPO
 
 const app = express();
 app.use(cors());
@@ -39,5 +39,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Backend PIX rodando na porta ${PORT}`);
 });
+
 
 
