@@ -7,10 +7,10 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* ===== ESTILO PREMIUM & MOBILE OPTIMIZED ===== */
+/* ===== ESTILO PREMIUM, CENTRALIZADO E COMPACTO ===== */
 :root {
     --accent-color: #a855f7;
-    --glass-bg: rgba(20, 20, 30, 0.7);
+    --glass-bg: rgba(20, 20, 30, 0.85);
     --glass-border: rgba(255, 255, 255, 0.1);
 }
 
@@ -19,34 +19,86 @@ body {
     color: white;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
-/* Ajuste do Header */
+/* Centralização Geral */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 header.glass {
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--glass-border);
+    position: relative;
 }
 
-header h1 {
-    font-size: 1rem;
-    letter-spacing: 1px;
-    font-weight: 800;
-    margin: 0;
+/* CARRINHO NO CANTO SUPERIOR DIREITO */
+.cart-container {
+    position: relative;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
 }
 
-/* ===== GATILHOS DE VENDA ===== */
+.cart-container:hover {
+    background: var(--accent-color);
+}
+
+.cart-icon {
+    font-size: 1.1rem;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ef4444;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Caixa Hero Compacta e Centralizada */
+.hero.glass {
+    width: 100%;
+    max-width: 360px; 
+    margin: 15px auto;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 25px;
+}
+
 .limit-badge {
     background: #ef4444;
     color: white;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: bold;
-    padding: 5px 15px;
+    padding: 4px 12px;
     border-radius: 50px;
-    display: inline-block;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     animation: pulse 2s infinite;
 }
 
@@ -56,128 +108,105 @@ header h1 {
     100% { transform: scale(1); }
 }
 
-/* ===== CARROSSEL PLANOS ===== */
+/* Carrossel Centralizado */
 .carousel-wrapper {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 10px 0;
 }
 
 .carousel-container {
+    width: 240px; /* Trava a visualização no card central */
     overflow: hidden;
-    width: 100%;
-    max-width: 900px;
 }
 
 .carousel {
     display: flex;
-    gap: 15px;
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    padding: 10px;
 }
 
 .plan-card {
-    min-width: 260px;
-    max-width: 280px;
+    min-width: 240px;
+    max-width: 240px;
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 20px;
-    text-align: center;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transition: 0.3s;
-}
-
-.plan-card:hover {
-    border-color: var(--accent-color);
-}
-
-.plan-card h3 { 
-    font-size: 0.8rem; 
-    color: var(--accent-color); 
-    letter-spacing: 2px;
-    margin-bottom: 5px;
-}
-
-.plan-card .duration {
-    font-size: 1.5rem;
-    font-weight: 700;
+    align-items: center;
 }
 
 .plan-card .price { 
     font-size: 1.8rem; 
-    font-weight: 800;
-    margin: 15px 0;
+    font-weight: 800; 
+    margin: 10px 0; 
+    color: #fff;
 }
 
 .btn-purchase {
     background: linear-gradient(90deg, #7b2ff7, #a855f7);
     border: none;
-    border-radius: 50px;
-    font-weight: 700;
-    padding: 12px !important;
-    font-size: 0.9rem;
-    cursor: pointer;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 12px;
     width: 100%;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
 }
 
-/* Botões Navegação */
+.btn-purchase:active {
+    transform: scale(0.95);
+}
+
 .carousel-btn {
-    background: rgba(255,255,255,0.1);
+    background: none;
     border: none;
     color: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+    font-size: 1.5rem;
     cursor: pointer;
-    z-index: 5;
+    padding: 10px;
+    opacity: 0.5;
 }
 
-/* ===== AVALIAÇÕES DINÂMICAS (1 por vez) ===== */
+/* Depoimentos Automáticos (1 por vez) */
 .review-box-v2 {
-    height: 120px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .review-item {
-    position: absolute;
-    opacity: 0;
-    transition: opacity 0.8s ease;
     text-align: center;
-    width: 90%;
+    animation: fadeIn 0.8s;
 }
 
-.review-item.active {
-    opacity: 1;
-    position: relative;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* ===== TOAST NOTIFICAÇÃO ===== */
 .purchase-toast {
     position: fixed;
     bottom: 20px;
-    left: 20px;
-    background: rgba(10, 10, 15, 0.9);
-    border-left: 4px solid var(--accent-color);
-    padding: 12px 20px;
-    border-radius: 5px;
-    font-size: 0.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.75rem;
     display: none;
-    z-index: 9999;
-}
-
-/* Mobile Adjustments */
-@media (max-width: 480px) {
-    .plan-card { min-width: 240px; }
-    .hero h2 { font-size: 1.8rem !important; }
+    white-space: nowrap;
+    z-index: 1000;
+    border: 1px solid var(--accent-color);
 }
 </style>
 </head>
@@ -187,80 +216,69 @@ header h1 {
 <div class="background">
     <img src="midia/foto.jpg" class="bg-image">
     <img src="midia/foto12.jpg" class="bg-image">
-    <img src="midia/foto14.jpg" class="bg-image">
 </div>
 
 <header class="glass">
-    <h1>VIP ACCESS</h1>
-    <button class="btn" id="logout-btn" style="width: auto; padding: 8px 15px; font-size: 0.8rem;">SAIR</button>
+    <h1 style="font-size: 0.9rem;">VIP ACCESS</h1>
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <div class="cart-container" onclick="location.href='#planos'">
+            <span class="cart-icon">🛒</span>
+            <div class="cart-count" id="cart-count">0</div>
+        </div>
+        <button class="btn" id="logout-btn" style="width: auto; padding: 5px 10px; font-size: 0.7rem;">SAIR</button>
+    </div>
 </header>
 
 <main>
-    <section class="hero glass">
+    <section class="hero glass" id="planos">
         <div class="limit-badge" id="vagas-badge">🔥 RESTAM APENAS 7 VAGAS</div>
-        <h2 style="font-size: 2.2rem; margin: 0;">Planos VIP</h2>
-        <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 5px;">Acesso imediato após o pagamento.</p>
-
+        <h2 style="font-size: 1.4rem; margin: 0;">Planos VIP</h2>
+        
         <div class="carousel-wrapper">
             <button class="carousel-btn" onclick="mover(-1)">‹</button>
             <div class="carousel-container">
                 <div class="carousel">
                     <div class="plan-card">
-                        <div>
-                            <h3>BÁSICO</h3>
-                            <div class="duration">24 Horas</div>
-                        </div>
-                        <div>
-                            <p class="price">R$ 10,00</p>
-                            <button class="btn btn-purchase" onclick="abrirPix(10)">Assinar</button>
-                        </div>
+                        <h3 style="font-size: 0.7rem; color: var(--accent-color);">BÁSICO</h3>
+                        <div style="font-size: 1.1rem; font-weight: bold;">24 Horas</div>
+                        <p class="price">R$ 10,00</p>
+                        <button class="btn-purchase" onclick="adicionarAoCarrinho(10)">Adicionar ao Carrinho</button>
                     </div>
-
-                    <div class="plan-card" style="border: 1px solid var(--accent-color);">
-                        <div style="background: var(--accent-color); font-size: 0.6rem; padding: 2px; border-radius: 3px; margin-bottom: 10px;">MAIS VENDIDO</div>
-                        <div>
-                            <div class="duration">7 Dias</div>
-                        </div>
-                        <div>
-                            <p class="price">R$ 50,00</p>
-                            <button class="btn btn-purchase" onclick="abrirPix(50)">Assinar</button>
-                        </div>
+                    <div class="plan-card" style="border-color: var(--accent-color);">
+                        <h3 style="font-size: 0.7rem; color: var(--accent-color);">SEMANAL</h3>
+                        <div style="font-size: 1.1rem; font-weight: bold;">7 Dias</div>
+                        <p class="price">R$ 50,00</p>
+                        <button class="btn-purchase" onclick="adicionarAoCarrinho(50)">Adicionar ao Carrinho</button>
                     </div>
-
                     <div class="plan-card">
-                        <div>
-                            <h3>VITALÍCIO</h3>
-                            <div class="duration">Ilimitado</div>
-                        </div>
-                        <div>
-                            <p class="price">R$ 100,00</p>
-                            <button class="btn btn-purchase" onclick="abrirPix(100)">Assinar</button>
-                        </div>
+                        <h3 style="font-size: 0.7rem; color: var(--accent-color);">PREMIUM</h3>
+                        <div style="font-size: 1.1rem; font-weight: bold;">Vitalício</div>
+                        <p class="price">R$ 100,00</p>
+                        <button class="btn-purchase" onclick="adicionarAoCarrinho(100)">Adicionar ao Carrinho</button>
                     </div>
                 </div>
             </div>
             <button class="carousel-btn" onclick="mover(1)">›</button>
         </div>
-        <p style="font-size: 0.7rem; opacity: 0.5; margin-top: 10px;">🔒 Pagamento Seguro e Criptografado</p>
+        <p style="font-size: 0.6rem; opacity: 0.5; margin-top: 10px;">💳 Pagamento via PIX com entrega imediata</p>
     </section>
 
-    <section class="hero glass">
-        <h2 style="font-size: 1.1rem; margin-bottom: 10px;">Depoimentos Reais</h2>
-        <div class="review-box-v2" id="review-box-v2">
-            </div>
+    <section class="hero glass" style="max-width: 320px;">
+        <h2 style="font-size: 0.9rem; margin-bottom: 5px;">Membros Online</h2>
+        <div class="review-box-v2" id="review-box-v2"></div>
     </section>
 </main>
 
 <div class="pix-modal" id="pix-modal">
     <div class="pix-box glass">
-        <h2>Pagamento PIX</h2>
-        <input type="text" id="cpf-input" placeholder="Digite seu CPF (apenas números)" maxlength="11">
-        <button class="btn btn-purchase" onclick="gerarPix()" style="margin-top:15px;">GERAR CÓDIGO</button>
+        <h2>Finalizar Compra</h2>
+        <p style="font-size: 0.8rem;">Para liberar seu acesso, digite seu CPF:</p>
+        <input type="text" id="cpf-input" placeholder="Apenas números" maxlength="11">
+        <button class="btn-purchase" onclick="gerarPix()" style="margin-top: 15px;">GERAR PIX AGORA</button>
         <div id="pix-result" style="display:none; margin-top:20px;">
-            <p style="font-size:0.8rem;">Copie o código abaixo:</p>
-            <textarea id="pix-code" readonly style="width:100%; height:60px; font-size:0.7rem;"></textarea>
-            <img id="pix-qrcode" style="width:180px; margin:15px auto; display:block; border-radius:10px;">
-            <button class="btn" onclick="fecharPix()" style="background:rgba(255,255,255,0.1);">FECHAR</button>
+            <textarea id="pix-code" readonly style="width:100%; height:50px; font-size:0.6rem;"></textarea>
+            <img id="pix-qrcode" style="width:150px; margin: 10px auto; display: block;">
+            <button class="btn" onclick="fecharPix()">CANCELAR</button>
         </div>
     </div>
 </div>
@@ -270,6 +288,25 @@ header h1 {
 <script src="pix.js"></script>
 
 <script>
+let itensNoCarrinho = 0;
+let valorDoCarrinho = 0;
+
+function adicionarAoCarrinho(valor) {
+    itensNoCarrinho++;
+    valorDoCarrinho = valor; 
+    document.getElementById("cart-count").innerText = itensNoCarrinho;
+    
+    // Feedback visual no carrinho
+    const cart = document.querySelector(".cart-container");
+    cart.style.transform = "scale(1.2)";
+    setTimeout(() => cart.style.transform = "scale(1)", 200);
+
+    // Abre o checkout imediato para conversão rápida
+    setTimeout(() => {
+        abrirPix(valor);
+    }, 400);
+}
+
 /* CARROSSEL DE PLANOS */
 let index = 0;
 function mover(dir){
@@ -278,51 +315,36 @@ function mover(dir){
     index += dir;
     if(index < 0) index = cards.length - 1;
     if(index >= cards.length) index = 0;
-    const offset = index * (cards[0].offsetWidth + 15);
-    c.style.transform = `translateX(${-offset}px)`;
+    c.style.transform = `translateX(${-index * 240}px)`;
 }
 
-/* AVALIAÇÕES AUTOMÁTICAS (4 SEGUNDOS) */
+/* DEPOIMENTOS DINÂMICOS (1 A CADA 4 SEGUNDOS) */
 const reviews = [
-    {u: "Usuário 712", t: "O conteúdo é absurdo, recebi na hora!"},
-    {u: "Usuário 104", t: "Melhor investimento que fiz esse mês."},
-    {u: "Usuário 882", t: "PIX aprovou e o link chegou no e-mail na mesma hora."},
-    {u: "Usuário 331", t: "Muito organizado e a qualidade é 4K real."},
-    {u: "Usuário 590", t: "Suporte nota 10, me ajudou com o acesso rápido."}
+    {u: "Marcos @vip", t: "O acesso chegou na hora!"},
+    {u: "Ana Silva", t: "Vídeos em 4K, valeu cada centavo."},
+    {u: "Felipe_19", t: "O plano vitalício é o melhor."},
+    {u: "Gamer_Pro", t: "Tudo liberado em segundos."}
 ];
 let rIndex = 0;
 function showReview(){
     const box = document.getElementById("review-box-v2");
     const r = reviews[rIndex];
-    box.innerHTML = `
-        <div class="review-item active">
-            <div style="color:#facc15; font-size:0.8rem;">★★★★★</div>
-            <div style="font-weight:bold; font-size:0.9rem; margin:3px 0;">${r.u}</div>
-            <div style="font-size:0.85rem; opacity:0.8;">"${r.t}"</div>
-        </div>
-    `;
+    box.innerHTML = `<div class="review-item">
+        <b style="font-size:0.8rem;">${r.u}</b><br>
+        <small style="opacity:0.7;">"${r.t}"</small>
+    </div>`;
     rIndex = (rIndex + 1) % reviews.length;
 }
 setInterval(showReview, 4000);
 showReview();
 
-/* NOTIFICAÇÃO DE COMPRA FAKE */
-const pNames = ["BÁSICO", "7 DIAS", "VITALÍCIO"];
+/* NOTIFICAÇÃO DE VENDA (TOAST) */
 setInterval(() => {
     const toast = document.getElementById("purchase-toast");
-    toast.innerText = `Usuário ${Math.floor(Math.random()*8000+1000)} acabou de assinar o plano ${pNames[Math.floor(Math.random()*3)]}`;
+    toast.innerText = `Usuário ${Math.floor(Math.random()*900+100)} acabou de comprar um acesso!`;
     toast.style.display = "block";
-    setTimeout(() => toast.style.display = "none", 4000);
-}, 12000);
-
-/* CONTADOR DE VAGAS FAKE (URGÊNCIA) */
-let vagas = 7;
-setInterval(() => {
-    if(vagas > 2) {
-        vagas--;
-        document.getElementById("vagas-badge").innerText = `🔥 RESTAM APENAS ${vagas} VAGAS`;
-    }
-}, 45000);
+    setTimeout(() => toast.style.display = "none", 3000);
+}, 11000);
 
 /* LOGOUT */
 document.getElementById("logout-btn").onclick = () => {
@@ -330,6 +352,5 @@ document.getElementById("logout-btn").onclick = () => {
     location.href="index.html";
 };
 </script>
-
 </body>
 </html>
