@@ -2,92 +2,179 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Planos - Meu Site Roxo</title>
+<title>Planos - VIP Experience</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 
 <style>
+/* ===== ESTILO HBO MAX / PREMIUM ===== */
+:root {
+    --accent-color: #a855f7;
+    --glass-bg: rgba(20, 20, 30, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: white;
+}
+
+/* Ajuste do Header */
+header.glass {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+header h1 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #fff, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 /* ===== CARROSSEL PLANOS ===== */
 .carousel-wrapper {
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px 0;
 }
 
 .carousel {
     display: flex;
-    gap: 10px;
-    transition: transform 0.5s ease;
+    gap: 20px;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-
-.plan-card h3 { font-size:1.1rem; }
-.plan-card p { font-size:0.85rem; }
-.plan-card .price { font-size:1.05rem; }
-.plan-card .btn-purchase {
-    font-size:0.85rem;
-    padding:10px 0;
+.plan-card {
+    min-width: 280px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+.plan-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-color);
+    background: rgba(168, 85, 247, 0.1);
+}
+
+.plan-card h3 { 
+    font-size: 0.9rem; 
+    letter-spacing: 3px; 
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.plan-card .duration {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.plan-card .price { 
+    font-size: 2rem; 
+    font-weight: 800;
+    margin: 20px 0;
+}
+
+.plan-card .price span {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.plan-card .features {
+    text-align: left;
+    font-size: 0.8rem;
+    margin-bottom: 25px;
+    list-style: none;
+    padding: 0;
+}
+
+.plan-card .features li {
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.plan-card .features li::before {
+    content: "✓";
+    color: var(--accent-color);
+    margin-right: 8px;
+}
+
+.btn-purchase {
+    background: linear-gradient(90deg, #7b2ff7, #a855f7);
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    cursor: pointer;
+    padding: 15px !important;
+}
+
+.btn-purchase:hover {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+    transform: scale(1.05);
+}
+
+/* Botões de Navegação */
 .carousel-btn {
-    background: rgba(168,85,247,0.3);
-    border: 3px solid rgba(168,85,247,0.5);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     color: white;
-    font-size: 0.9em;
-    width: 20px;
-    height: 20px;
+    font-size: 1.5rem;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     cursor: pointer;
     backdrop-filter: blur(10px);
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.carousel-btn:hover {
+    background: var(--accent-color);
 }
 
 /* ===== AVALIAÇÕES ===== */
-.review-carousel {
-    overflow: hidden;
-    margin-top: 30px;
-}
-
-.review-track {
-    display: flex;
-    gap: 20px;
-    animation: scrollReviews 35s linear infinite;
-}
-
 .review-card {
-    min-width: 240px;
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 18px;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.review-stars { color:#facc15; }
-.review-user { font-weight:600; margin:5px 0; }
-
-@keyframes scrollReviews {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    min-width: 280px;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 /* ===== NOTIFICAÇÃO ===== */
 .purchase-toast {
-    position: fixed;
-    bottom: 25px;
-    left: 25px;
-    background: rgba(120,0,200,0.35);
-    backdrop-filter: blur(20px);
-    border-radius: 50px;
-    padding: 14px 22px;
-    font-size: 0.85rem;
-    box-shadow: 0 0 20px #7b2ff7;
-    display: none;
-    z-index: 9999;
+    background: rgba(20, 20, 30, 0.8);
+    border: 1px solid var(--accent-color);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 </style>
 </head>
 
 <body>
 
-<!-- FUNDO -->
 <div class="background">
     <img src="midia/foto.jpg" class="bg-image">
     <img src="midia/foto12.jpg" class="bg-image">
@@ -95,77 +182,99 @@
 </div>
 
 <header class="glass">
-    <h1>GARANTA JA ACESSO AO GRUPO VIP!</h1>
-    <button class="btn" id="logout-btn">Sair</button>
+    <h1>VIP ACCESS</h1>
+    <button class="btn" id="logout-btn" style="width: auto; padding: 10px 20px;">SAIR</button>
 </header>
 
 <main>
 <section class="hero glass">
-<h2>Escolha Seu Plano</h2>
-<p>Aproveite os melhores planos para assinar!</p>
+<h2 style="font-size: 2.5rem; margin-bottom: 5px;">Escolha Seu Plano</h2>
+<p style="opacity: 0.7; margin-bottom: 30px;">Cancele a qualquer momento. Acesso imediato.</p>
 
-<!-- CARROSSEL PLANOS -->
 <div class="carousel-wrapper">
 <button class="carousel-btn" onclick="mover(-1)">‹</button>
 
-<div class="carousel">
-<div class="plan-card">
-<h3>BASICO</h3>
-<p>1 DIA</p>
-<p class="price">R$ 10,00</p>
-<button class="btn btn-purchase" onclick="abrirPix(10)">Assinar</button>
-</div>
+<div class="carousel-container" style="overflow: hidden; width: 100%; max-width: 920px;">
+    <div class="carousel">
+        <div class="plan-card">
+            <div>
+                <h3>BÁSICO</h3>
+                <div class="duration">24 Horas</div>
+                <ul class="features">
+                    <li>Acesso Total ao Grupo</li>
+                    <li>Download Liberado</li>
+                    <li>Suporte 24h</li>
+                </ul>
+            </div>
+            <div>
+                <p class="price">R$ 10,00 <span>/dia</span></p>
+                <button class="btn btn-purchase" onclick="abrirPix(10)">Assinar Agora</button>
+            </div>
+        </div>
 
-<div class="plan-card">
-<h3>MEDIO</h3>
-<p>7 DIAS</p>
-<p class="price">R$ 50,00</p>
-<button class="btn btn-purchase" onclick="abrirPix(50)">Assinar</button>
-</div>
+        <div class="plan-card" style="border-color: var(--accent-color); background: rgba(168, 85, 247, 0.05);">
+            <div>
+                <h3 style="color: #fff; background: var(--accent-color); border-radius: 4px; display: inline-block; padding: 2px 8px; font-size: 0.7rem;">MAIS POPULAR</h3>
+                <div class="duration">7 Dias</div>
+                <ul class="features">
+                    <li>Todos os benefícios do Básico</li>
+                    <li>Conteúdo Exclusivo Semanal</li>
+                    <li>Melhor custo-benefício</li>
+                </ul>
+            </div>
+            <div>
+                <p class="price">R$ 50,00 <span>/semana</span></p>
+                <button class="btn btn-purchase" onclick="abrirPix(50)">Assinar Agora</button>
+            </div>
+        </div>
 
-<div class="plan-card">
-<h3>PREMIUM</h3>
-<p>ILIMITADO</p>
-<p class="price">R$ 100,00</p>
-<button class="btn btn-purchase" onclick="abrirPix(100)">Assinar</button>
-</div>
+        <div class="plan-card">
+            <div>
+                <h3>PREMIUM</h3>
+                <div class="duration">Vitalício</div>
+                <ul class="features">
+                    <li>Acesso Para Sempre</li>
+                    <li>Atualizações Vitalícias</li>
+                    <li>Grupo VIP Secreto</li>
+                </ul>
+            </div>
+            <div>
+                <p class="price">R$ 100,00 <span>/único</span></p>
+                <button class="btn btn-purchase" onclick="abrirPix(100)">Assinar Agora</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <button class="carousel-btn" onclick="mover(1)">›</button>
 </div>
 </section>
 
-<!-- AVALIAÇÕES -->
 <section class="hero glass">
-<h2>Avaliações</h2>
-
+<h2 style="font-size: 1.5rem;">O que os assinantes dizem</h2>
 <div class="review-carousel">
 <div class="review-track" id="review-track"></div>
 </div>
 </section>
 </main>
 
-<footer class="glass">
-<p>GARANTA JA SEU ACESSO AO VIP, MAIS DE 10 MIL FOTOS E VIDEOS VAZADOS, VEJA SUA FAMOSA FAVORITA!
-</p>
+<footer class="glass" style="margin-top: 50px;">
+    <p style="font-size: 0.7rem; opacity: 0.5;">© 2026 VIP ACCESS - Todos os direitos reservados.</p>
 </footer>
 
-<!-- MODAL PIX -->
 <div class="pix-modal" id="pix-modal">
-<div class="pix-box glass">
-<h2>Pagamento PIX</h2>
-
-<input type="text" id="cpf-input" placeholder="Digite seu CPF" maxlength="11">
-
-<button class="btn btn-purchase" onclick="gerarPix()">Gerar PIX</button>
-
-<div id="pix-result" style="display:none; margin-top:20px;">
-<p><strong>Código PIX</strong></p>
-<textarea id="pix-code" readonly></textarea>
-<img id="pix-qrcode">
-<button class="btn" onclick="fecharPix()">Fechar</button>
-</div>
-</div>
+    <div class="pix-box glass">
+        <h2>Pagamento PIX</h2>
+        <p style="font-size: 0.9rem; margin-bottom: 15px;">Insira seu CPF para identificar o pagamento.</p>
+        <input type="text" id="cpf-input" placeholder="000.000.000-00" maxlength="11">
+        <button class="btn btn-purchase" onclick="gerarPix()">Confirmar e Gerar Código</button>
+        <div id="pix-result" style="display:none; margin-top:20px;">
+            <p>Copie o código ou escaneie o QR Code:</p>
+            <textarea id="pix-code" readonly></textarea>
+            <img id="pix-qrcode" style="border-radius: 10px; margin: 10px 0;">
+            <button class="btn" onclick="fecharPix()" style="background: rgba(255,255,255,0.1);">Fechar</button>
+        </div>
+    </div>
 </div>
 
 <div class="purchase-toast" id="purchase-toast"></div>
@@ -173,104 +282,45 @@
 <script src="pix.js"></script>
 
 <script>
-/* CARROSSEL */
+/* CARROSSEL MELHORADO */
 let index = 0;
 function mover(dir){
-const c=document.querySelector('.carousel');
-const cards=document.querySelectorAll('.plan-card');
-index+=dir;
-if(index<0) index=cards.length-1;
-if(index>=cards.length) index=0;
-c.style.transform=`translateX(${-index*(cards[0].offsetWidth+20)}px)`;
+    const c = document.querySelector('.carousel');
+    const cards = document.querySelectorAll('.plan-card');
+    const step = cards[0].offsetWidth + 20;
+    index += dir;
+    if(index < 0) index = cards.length - 1;
+    if(index >= cards.length) index = 0;
+    c.style.transform = `translateX(${-index * step}px)`;
 }
 
-/* AVALIAÇÕES */
-const reviews=[
-"Tudo perfeito, recebi o acesso no mesmo minuto."
-,
-"Muito rápido e seguro, ganharam um cliente!"
-,
-"Achei que ia demorar, mas chegou na hora. Top!"
-,
-"Conteúdo sensacional, melhor do que eu esperava."
-,
-"Pode confiar, galera. Caiu direto no meu e-mail."
-,
-"Muito bom, material de primeira linha."
-,
-"Comprei e já tô assistindo. Recomendo pra geral!"
-,
-"Tudo certinho! Preço justo e qualidade excelente."
-,
-"Suporte atencioso e entrega a jato. Nota 10!"
-,
-"Vale cada centavo, podem comprar sem medo."
-,
-"Já é a segunda vez que pego com eles, sempre rápido."
-,
-"Simples e direto, funcionou perfeitamente no meu celular."
-,
-"Rapaziada, muito bom! Vídeos em alta resolução."
-,
-"Não travou nada e o acesso foi liberado na hora."
-,
-"Top de verdade, superou minhas expectativas."
-,
-"Entrega automática e sem enrolação. Curti muito!"
-,
-"Muito satisfeito com a compra, ótimo custo-benefício."
-,
-"Imagens nítidas e vídeos perfeitos. Adorei.",
-
-"O link chegou rapidão, já baixei tudo aqui.",
-
-"Recomendo de olhos fechados, site super seguro.",
-
-"Excelente atendimento e os arquivos vieram completos.",
-
-"Tudo liberado em questão de segundos. Fantástico!"
-,
-"Qualidade VIP mesmo, vou comprar de novo certeza.",
-
-"Tava com receio, mas deu tudo certo. Podem ir na fé!",
-
-"Acesso fácil e rápido. Muito top o conteúdo.",
-
-"Cumprem exatamente o que prometem. Valeu a pena.",
-
-"Melhor investimento, entrega mais rápida que já vi.",
-
-"Show de bola! Vídeos carregam rapidinho."
-,
-"Perfeito, chegou tudo organizado nas pastas.",
-
-"Serviço impecável, mandei o link até pro meu primo.",
-];
+/* AVALIAÇÕES (MANTIDO) */
+const reviews=["Tudo perfeito, recebi o acesso no mesmo minuto.","Muito rápido e seguro!","Achei que ia demorar, mas chegou na hora.","Qualidade absurda!","Pode confiar, caiu direto no meu e-mail.","Material de primeira linha.","Comprei e já tô assistindo.","Tudo certinho! Preço justo.","Suporte nota 10!","Vale cada centavo.","Já é a segunda vez que compro.","Simples e direto.","Vídeos em alta resolução.","Acesso liberado na hora.","Superou minhas expectativas.","Entrega automática!","Ótimo custo-benefício.","Imagens nítidas!"];
 const track=document.getElementById("review-track");
-for(let i=0;i<12;i++){
-track.innerHTML+=`
-<div class="review-card">
-<div class="review-stars">★★★★★</div>
-<div class="review-user">Usuário ${Math.floor(Math.random()*+1000)}</div>
-<div>${reviews[Math.floor(Math.random()*reviews.length)]}</div>
-</div>`;
+for(let i=0;i<20;i++){
+    const userNum = Math.floor(Math.random()*900 + 100);
+    track.innerHTML+=`
+    <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-user">Usuário ${userNum}</div>
+        <div style="font-size: 0.85rem; opacity: 0.8;">${reviews[Math.floor(Math.random()*reviews.length)]}</div>
+    </div>`;
 }
 
-/* NOTIFICAÇÃO FAKE */
-const planos=["24 HORAS (1 DIA)","7 DIAS","VITALÍCIO"];
+/* NOTIFICAÇÃO (MANTIDO) */
+const planosToast=["24 HORAS","7 DIAS","VITALÍCIO"];
 const toast=document.getElementById("purchase-toast");
 setInterval(()=>{
-toast.innerText=`Usuário ${Math.floor(Math.random()*9000+1000)} comprou o plano ${planos[Math.floor(Math.random()*3)]}`;
-toast.style.display="block";
-setTimeout(()=>toast.style.display="none",5000);
-},9000);
+    toast.innerText=`Usuário ${Math.floor(Math.random()*9000+1000)} assinou o plano ${planosToast[Math.floor(Math.random()*3)]}`;
+    toast.style.display="block";
+    setTimeout(()=>toast.style.display="none",5000);
+},10000);
 
 /* LOGOUT */
 document.getElementById("logout-btn").onclick=()=>{
-localStorage.removeItem("token");
-location.href="index.html";
+    localStorage.removeItem("token");
+    location.href="index.html";
 };
 </script>
-
 </body>
 </html>
