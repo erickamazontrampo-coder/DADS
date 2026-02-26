@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Planos - Meu Site Roxo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ===== CARROSSEL PLANOS ===== */
+.carousel-wrapper {
+
+}
+
+.carousel {
+    display: flex;
+    gap: 10px;
+    transition: transform 0.5s ease;
+}
+
+
+.plan-card h3 { font-size:1.1rem; }
+.plan-card p { font-size:0.85rem; }
+.plan-card .price { font-size:1.05rem; }
+.plan-card .btn-purchase {
+    font-size:0.85rem;
+    padding:10px 0;
+}
+
+.carousel-btn {
+    background: rgba(168,85,247,0.3);
+    border: 3px solid rgba(168,85,247,0.5);
+    color: white;
+    font-size: 0.9em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+}
+
+/* ===== AVALIAÇÕES ===== */
+.review-carousel {
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.review-track {
+    display: flex;
+    gap: 20px;
+    animation: scrollReviews 35s linear infinite;
+}
+
+.review-card {
+    min-width: 240px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.review-stars { color:#facc15; }
+.review-user { font-weight:600; margin:5px 0; }
+
+@keyframes scrollReviews {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* ===== NOTIFICAÇÃO ===== */
+.purchase-toast {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    background: rgba(120,0,200,0.35);
+    backdrop-filter: blur(20px);
+    border-radius: 50px;
+    padding: 14px 22px;
+    font-size: 0.85rem;
+    box-shadow: 0 0 20px #7b2ff7;
+    display: none;
+    z-index: 9999;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FUNDO -->
+<div class="background">
+    <img src="midia/foto.jpg" class="bg-image">
+    <img src="midia/foto12.jpg" class="bg-image">
+    <img src="midia/foto14.jpg" class="bg-image">
+</div>
+
+<header class="glass">
+    <h1>GARANTA JA ACESSO AO GRUPO VIP!</h1>
+    <button class="btn" id="logout-btn">Sair</button>
+</header>
+
+<main>
+<section class="hero glass">
+<h2>Escolha Seu Plano</h2>
+<p>Aproveite os melhores planos para assinar!</p>
+
+<!-- CARROSSEL PLANOS -->
+<div class="carousel-wrapper">
+<button class="carousel-btn" onclick="mover(-1)">‹</button>
+
+<div class="carousel">
+<div class="plan-card">
+<h3>BASICO</h3>
+<p>1 DIA</p>
+<p class="price">R$ 10,00</p>
+<button class="btn btn-purchase" onclick="abrirPix(10)">Assinar</button>
+</div>
+
+<div class="plan-card">
+<h3>MEDIO</h3>
+<p>7 DIAS</p>
+<p class="price">R$ 50,00</p>
+<button class="btn btn-purchase" onclick="abrirPix(50)">Assinar</button>
+</div>
+
+<div class="plan-card">
+<h3>PREMIUM</h3>
+<p>ILIMITADO</p>
+<p class="price">R$ 100,00</p>
+<button class="btn btn-purchase" onclick="abrirPix(100)">Assinar</button>
+</div>
+</div>
+
+<button class="carousel-btn" onclick="mover(1)">›</button>
+</div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section class="hero glass">
+<h2>Avaliações</h2>
+
+<div class="review-carousel">
+<div class="review-track" id="review-track"></div>
+</div>
+</section>
+</main>
+
+<footer class="glass">
+<p>GARANTA JA SEU ACESSO AO VIP, MAIS DE 10 MIL FOTOS E VIDEOS VAZADOS, VEJA SUA FAMOSA FAVORITA!
+</p>
+</footer>
+
+<!-- MODAL PIX -->
+<div class="pix-modal" id="pix-modal">
+<div class="pix-box glass">
+<h2>Pagamento PIX</h2>
+
+<input type="text" id="cpf-input" placeholder="Digite seu CPF" maxlength="11">
+
+<button class="btn btn-purchase" onclick="gerarPix()">Gerar PIX</button>
+
+<div id="pix-result" style="display:none; margin-top:20px;">
+<p><strong>Código PIX</strong></p>
+<textarea id="pix-code" readonly></textarea>
+<img id="pix-qrcode">
+<button class="btn" onclick="fecharPix()">Fechar</button>
+</div>
+</div>
+</div>
+
+<div class="purchase-toast" id="purchase-toast"></div>
+
+<script src="pix.js"></script>
+
+<script>
+/* CARROSSEL */
+let index = 0;
+function mover(dir){
+const c=document.querySelector('.carousel');
+const cards=document.querySelectorAll('.plan-card');
+index+=dir;
+if(index<0) index=cards.length-1;
+if(index>=cards.length) index=0;
+c.style.transform=`translateX(${-index*(cards[0].offsetWidth+20)}px)`;
+}
+
+/* AVALIAÇÕES */
+const reviews=[
+"Tudo perfeito, recebi o acesso no mesmo minuto."
+,
+"Muito rápido e seguro, ganharam um cliente!"
+,
+"Achei que ia demorar, mas chegou na hora. Top!"
+,
+"Conteúdo sensacional, melhor do que eu esperava."
+,
+"Pode confiar, galera. Caiu direto no meu e-mail."
+,
+"Muito bom, material de primeira linha."
+,
+"Comprei e já tô assistindo. Recomendo pra geral!"
+,
+"Tudo certinho! Preço justo e qualidade excelente."
+,
+"Suporte atencioso e entrega a jato. Nota 10!"
+,
+"Vale cada centavo, podem comprar sem medo."
+,
+"Já é a segunda vez que pego com eles, sempre rápido."
+,
+"Simples e direto, funcionou perfeitamente no meu celular."
+,
+"Rapaziada, muito bom! Vídeos em alta resolução."
+,
+"Não travou nada e o acesso foi liberado na hora."
+,
+"Top de verdade, superou minhas expectativas."
+,
+"Entrega automática e sem enrolação. Curti muito!"
+,
+"Muito satisfeito com a compra, ótimo custo-benefício."
+,
+"Imagens nítidas e vídeos perfeitos. Adorei.",
+
+"O link chegou rapidão, já baixei tudo aqui.",
+
+"Recomendo de olhos fechados, site super seguro.",
+
+"Excelente atendimento e os arquivos vieram completos.",
+
+"Tudo liberado em questão de segundos. Fantástico!"
+,
+"Qualidade VIP mesmo, vou comprar de novo certeza.",
+
+"Tava com receio, mas deu tudo certo. Podem ir na fé!",
+
+"Acesso fácil e rápido. Muito top o conteúdo.",
+
+"Cumprem exatamente o que prometem. Valeu a pena.",
+
+"Melhor investimento, entrega mais rápida que já vi.",
+
+"Show de bola! Vídeos carregam rapidinho."
+,
+"Perfeito, chegou tudo organizado nas pastas.",
+
+"Serviço impecável, mandei o link até pro meu primo.",
+];
+const track=document.getElementById("review-track");
+for(let i=0;i<12;i++){
+track.innerHTML+=`
+<div class="review-card">
+<div class="review-stars">★★★★★</div>
+<div class="review-user">Usuário ${Math.floor(Math.random()*+1000)}</div>
+<div>${reviews[Math.floor(Math.random()*reviews.length)]}</div>
+</div>`;
+}
+
+/* NOTIFICAÇÃO FAKE */
+const planos=["24 HORAS (1 DIA)","7 DIAS","VITALÍCIO"];
+const toast=document.getElementById("purchase-toast");
+setInterval(()=>{
+toast.innerText=`Usuário ${Math.floor(Math.random()*9000+1000)} comprou o plano ${planos[Math.floor(Math.random()*3)]}`;
+toast.style.display="block";
+setTimeout(()=>toast.style.display="none",5000);
+},9000);
+
+/* LOGOUT */
+document.getElementById("logout-btn").onclick=()=>{
+localStorage.removeItem("token");
+location.href="index.html";
+};
+</script>
+
+</body>
+</html>
