@@ -1,4 +1,3 @@
-
 let valorSelecionado = 0;
 
 function abrirPix(valor) {
@@ -20,7 +19,8 @@ function gerarPix() {
     return;
   }
 
-  fetch("http://localhost:3000/create-pix", {
+  // ATENÇÃO: Mudamos para o link do Render abaixo
+  fetch("https://dads-axov.onrender.com/create-pix", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
