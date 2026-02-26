@@ -4,7 +4,7 @@
    🎛️ CONTROLES GERAIS DO FUNDO (MUDE SÓ AQUI)
 ===================================================== */
 :root {
-    --blur-intensity: 10px;   /* 🔮 BLUR do fundo (20px leve | 40px forte) */
+    --blur-intensity: 8px;   /* 🔮 BLUR do fundo (20px leve | 40px forte) */
     --zoom-level: 1.0;        /* 🔍 ZOOM da imagem (1.0 normal | 1.3 mais perto) */
     --darkness: 0.9;          /* 🌑 BRILHO (0.4 escuro | 0.8 claro) */
     --transition-time: 9s;   /* ⏱️ TEMPO do slide */
@@ -234,3 +234,4 @@ body {
     to { opacity:1; transform:scale(1); }
 
 }
+
