@@ -33,7 +33,10 @@ app.post("/create-pix", async (req, res) => {
     res.status(500).json({ error: true });
   }
 });
+// O Render vai usar o process.env.PORT. Se estiver no seu PC, ele usa a 3000.
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000, () => {
-  console.log("✅ Backend PIX rodando em http://localhost:3000");
+app.listen(PORT, () => {
+  console.log(`✅ Backend PIX rodando na porta ${PORT}`);
+});
 });
